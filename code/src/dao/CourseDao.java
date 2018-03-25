@@ -31,6 +31,31 @@ public class CourseDao {
         return st;
     }
 
+    public Course getDataName(String courseName)
+    {
+        Course st=null;
+        Connection con=ConnectionFactory.getConnection();
+        try {
+            PreparedStatement s=con.prepareStatement("SELECT * from courses where nameCourse=?");
+            s.setString(1,courseName);
+            ResultSet rs=s.executeQuery();
+            while(rs.next())
+            {
+                st=new Course(rs.getInt(1),rs.getString(2),rs.getDate(3).toLocalDate(),rs.getDate(4).toLocalDate());
+
+            }
+            ConnectionFactory.close(rs);
+            ConnectionFactory.close(s);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        finally {
+            ConnectionFactory.close(con);
+        }
+
+        return st;
+    }
+
 
     public void insert(Course  d) {
 

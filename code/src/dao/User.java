@@ -13,6 +13,12 @@ public class User  {
         this.username = username;
         this.password = password;
     }
+    public User(String username, String password)
+    {
+        this.username = username;
+        this.password = password;
+    }
+
 
     public String getUsername() {
         return username;
@@ -43,7 +49,8 @@ public class User  {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         User user = (User) o;
-        return userId == user.userId;
+        return Objects.equals(username, user.username) &&
+                Objects.equals(password, user.password);
     }
 
     @Override

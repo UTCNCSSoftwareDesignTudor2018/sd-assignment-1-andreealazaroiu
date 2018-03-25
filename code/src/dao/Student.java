@@ -20,6 +20,8 @@ public class Student extends User {
 
     }
 
+
+
     public int getCardNumber() {
         return cardNumber;
     }
@@ -56,8 +58,11 @@ public class Student extends User {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
+        if (!super.equals(o)) return false;
         Student student = (Student) o;
-        return id == student.id;
+        return cardNumber == student.cardNumber &&
+                pnc == student.pnc &&
+                Objects.equals(name, student.name);
     }
 
     @Override

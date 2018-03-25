@@ -2,6 +2,7 @@ package dao;
 
 import javax.xml.transform.Result;
 import java.sql.*;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -30,6 +31,32 @@ public class ExamDao {
 
         return st;
     }
+
+    public Exam getDataName(LocalDate examName)
+    {
+        Exam st=null;
+        Connection con=ConnectionFactory.getConnection();
+        try {
+            PreparedStatement s=con.prepareStatement("SELECT * from exams where dateExam=?");
+            s.setDate(1,Date.valueOf(examName));
+            ResultSet rs=s.getResultSet();
+            while(rs.next())
+            {
+                st=new Exam(rs.getInt(1),rs.getDate(2).toLocalDate());
+
+            }
+            ConnectionFactory.close(rs);
+            ConnectionFactory.close(s);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        finally {
+            ConnectionFactory.close(con);
+        }
+
+        return st;
+    }
+
 
     public void insert(Exam  d) {
 

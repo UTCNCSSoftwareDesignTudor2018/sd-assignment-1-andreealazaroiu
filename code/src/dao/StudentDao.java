@@ -30,6 +30,32 @@ import java.util.List;
          return st;
      }
 
+     public Student getDataName(String studentName)
+     {
+         Student st=null;
+         Connection con=ConnectionFactory.getConnection();
+
+         try {
+             PreparedStatement s=con.prepareStatement("SELECT idStudents,users.id,username, password,nameStudent,cardNumber,pnc from students join users on (students.idStudents=users.id) where nameStudent=?");
+             s.setString(1,studentName);
+             ResultSet rs=s.executeQuery();
+             while(rs.next())
+             {
+                 st=new Student(rs.getInt(1),rs.getInt(2),rs.getString(3),rs.getString(4),rs.getString(5),rs.getInt(6),rs.getInt(7));
+
+             }
+             ConnectionFactory.close(rs);
+             ConnectionFactory.close(s);
+         } catch (SQLException e) {
+             e.printStackTrace();
+         }
+         finally {
+             ConnectionFactory.close(con);
+         }
+
+         return st;
+     }
+
 
      public void insert(Student  d) {
          UserDao u=new UserDao();
@@ -101,7 +127,7 @@ import java.util.List;
          Connection con = ConnectionFactory.getConnection();
          try {
              Statement st=con.createStatement();
-             st.execute("SELECT idStudents,id,username, password,nameStudent,cardNumber,pnc  from students join users on(students.idStudents=users.id) ");
+             st.execute("SELECT idStudents,users.id,username, password,nameStudent,cardNumber,pnc  from students join users on(students.idStudents=users.id) ");
              ResultSet rs=st.getResultSet();
              while(rs.next())
              {

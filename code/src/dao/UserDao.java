@@ -32,6 +32,34 @@ public class UserDao {
     }
 
 
+    public User getDataName(String user){
+
+
+        User st=null;
+        Connection con=ConnectionFactory.getConnection();
+        try {
+            PreparedStatement s=con.prepareStatement("SELECT * from users where username like? ");
+            s.setString(1,user);
+            ResultSet rs=s.executeQuery();
+            while(rs.next())
+            {
+                st=new User(rs.getInt(1),rs.getString(2),rs.getString(3));
+
+            }
+            ConnectionFactory.close(rs);
+            ConnectionFactory.close(s);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        finally {
+            ConnectionFactory.close(con);
+        }
+
+        return st;
+
+    }
+
+
     public void insert(User  d) {
 
         Connection con=ConnectionFactory.getConnection();

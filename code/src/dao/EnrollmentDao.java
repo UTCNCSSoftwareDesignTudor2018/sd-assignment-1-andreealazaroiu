@@ -36,6 +36,36 @@ public class EnrollmentDao {
     }
 
 
+    public Enrollment getDataName(Student stude) {
+
+        StudentDao stud=new StudentDao();
+        CourseDao co=new CourseDao();
+        ExamDao ex=new ExamDao();
+
+        Enrollment st=null;
+        Connection con=ConnectionFactory.getConnection();
+        try {
+            PreparedStatement s=con.prepareStatement("SELECT * from enrollments  where studentId=?");
+            s.setInt(1,stude.getId());
+            ResultSet rs=s.executeQuery();
+            while(rs.next())
+            {
+                st=new Enrollment(rs.getInt(5),stud.getData(rs.getInt(1)),co.getData(rs.getInt(2)),ex.getData(rs.getInt(3)),rs.getInt(4));
+
+            }
+            ConnectionFactory.close(rs);
+            ConnectionFactory.close(s);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        finally {
+            ConnectionFactory.close(con);
+        }
+
+        return st;
+    }
+
+
     public void insert(Enrollment  d) {
 
 
