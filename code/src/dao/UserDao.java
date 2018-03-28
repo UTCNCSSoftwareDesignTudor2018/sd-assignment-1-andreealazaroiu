@@ -38,7 +38,7 @@ public class UserDao {
         User st=null;
         Connection con=ConnectionFactory.getConnection();
         try {
-            PreparedStatement s=con.prepareStatement("SELECT * from users where username like? ");
+            PreparedStatement s=con.prepareStatement("SELECT * from users where username=? ");
             s.setString(1,user);
             ResultSet rs=s.executeQuery();
             while(rs.next())
@@ -64,10 +64,9 @@ public class UserDao {
 
         Connection con=ConnectionFactory.getConnection();
         try{
-            PreparedStatement s=con.prepareStatement("INSERT into users (id,username,password) VALUES(?,?,?)");
-            s.setInt(1,d.getUserId());
-            s.setString(2,d.getUsername());
-            s.setString(3,d.getPassword());
+            PreparedStatement s=con.prepareStatement("INSERT into users (username,password) VALUES(?,?)");
+            s.setString(1,d.getUsername());
+            s.setString(2,d.getPassword());
             s.executeUpdate();
             s.close();
         }catch(SQLException e) {
@@ -83,8 +82,9 @@ public class UserDao {
 
        Connection con=ConnectionFactory.getConnection();
         try{
-            Statement s=con.createStatement();
-            s.execute("DELETE from  users where id="+d.getUserId());
+            PreparedStatement s=con.prepareStatement("Delete from users where username=?");
+            s.setString(1,d.getUsername());
+            s.executeUpdate();
             ConnectionFactory.close(s);
         }catch(SQLException e) {
             e.printStackTrace();
@@ -96,15 +96,15 @@ public class UserDao {
     }
 
 
-        public void update(Student d) {
+        public void update(User d) {
 
         Connection con = ConnectionFactory.getConnection();
         try {
 
-            PreparedStatement st = con.prepareStatement("UPDATE users SET  username= ?, password=? WHERE id= ?");
+            PreparedStatement st = con.prepareStatement("UPDATE users SET  username= ?, password=? WHERE username= ?");
             st.setString(1, d.getUsername());
             st.setString(2, d.getPassword());
-            st.setInt(3,d.getUserId());
+            st.setString(3,d.getUsername());
             st.executeUpdate();
             st.close();
         } catch (SQLException e) {

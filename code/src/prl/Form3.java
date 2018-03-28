@@ -6,10 +6,11 @@ import dao.Student;
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.WindowEvent;
 
 public class Form3 extends JFrame{
 
-    private JFrame frame;
+    //private JFrame frame;
     private JTextField usernameField;
     private JTextField passwField;
     private JTextField nameField;
@@ -20,10 +21,8 @@ public class Form3 extends JFrame{
 
     public Form3(){
 
-        this.frame=new JFrame();
-        this.frame.setSize(500,200);
 
-
+       super.setSize(500,200);
 
         this.panel1=new JPanel();
         this.usernameField=new JTextField("Username",20);
@@ -34,7 +33,6 @@ public class Form3 extends JFrame{
 
         this.signin=new JButton("Sign In");
 
-
         panel1.add(usernameField);
         panel1.add(passwField);
         panel1.add(nameField);
@@ -43,10 +41,16 @@ public class Form3 extends JFrame{
         panel1.add(signin);
 
         panel1.setVisible(true);
-        frame.add(panel1);
-        this.frame.setVisible(true);
+        super.add(panel1);
+        //this.frame.setVisible(true);
 
 
+
+    }
+
+
+    public void actionButtons()
+    {
         signin.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -54,13 +58,14 @@ public class Form3 extends JFrame{
 
                 if(signin.isEnabled())
                 {
-                   int id=so.getIdForNew()+1;
+                    int id=so.getIdForNew()+1;
                     so.createProfile(new Student(id,id,usernameField.getText(),passwField.getText(),
-                                                nameField.getText(),Integer.parseInt(cardField.getText()),Integer.parseInt(pncField.getText())));
+                            nameField.getText(),Integer.parseInt(cardField.getText()),Integer.parseInt(pncField.getText())));
 
                 }
-
             }
         });
+
+
     }
 }

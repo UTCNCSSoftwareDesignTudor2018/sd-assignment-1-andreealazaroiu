@@ -1,5 +1,6 @@
 package dao;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Objects;
 
@@ -9,14 +10,22 @@ public class Enrollment {
     private int grade;
     private Student student;
     private Course course;
-    private Exam exam;
+    private LocalDate exam;
 
-    public Enrollment(int enrollId, Student student, Course course, Exam exam,int grade) {
+    public Enrollment(int enrollId, Student student, Course course, LocalDate exam,int grade) {
         this.enrollId=enrollId;
         this.grade = grade;
         this.student = student;
         this.course = course;
         this.exam = exam;
+    }
+
+    public Enrollment(int enrollId, Student student, Course course,int grade) {
+        this.enrollId=enrollId;
+        this.grade = grade;
+        this.student = student;
+        this.course = course;
+        this.exam = null;
     }
 
     public int getGrade() {
@@ -43,11 +52,11 @@ public class Enrollment {
         this.course = course;
     }
 
-    public Exam getExam() {
+    public LocalDate getExam() {
         return exam;
     }
 
-    public void setExam(Exam exam) {
+    public void setExam(LocalDate exam) {
         this.exam = exam;
     }
 
@@ -75,12 +84,18 @@ public class Enrollment {
 
     @Override
     public String toString() {
-        return "Enrollment{" +
-                "enrollId=" + enrollId +
-                ", grade=" + grade +
-                ", student=" + student +
-                ", course=" + course +
-                ", exam=" + exam +
-                '}';
+        String exe="";
+        if (exam==null)
+        {exe="Date not set yet";}
+        else
+            exe+=exam.toString();
+
+        return "Enrollment:" +
+                "enrollment id =" + enrollId +
+                ", grade for exam =" + grade +
+                ", student name=" + student.getName() +
+                ", course name=" + course.getName() +
+                ", exam date =" + exe +
+                "\n";
     }
 }

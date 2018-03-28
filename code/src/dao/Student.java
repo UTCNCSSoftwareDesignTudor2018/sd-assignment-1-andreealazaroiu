@@ -20,7 +20,13 @@ public class Student extends User {
 
     }
 
-
+    public Student(String username,String password,String name,int cardNumber, int pnc)
+    {
+        super(username,password);
+        this.name=name;
+        this.cardNumber = cardNumber;
+        this.pnc=pnc;
+    }
 
     public int getCardNumber() {
         return cardNumber;
@@ -73,11 +79,11 @@ public class Student extends User {
 
     @Override
     public String toString() {
-        return "Student{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", cardNumber=" + cardNumber +
-                ", pnc=" + pnc +
-                '}';
+        return "Student:" +
+                "id =" + id +
+                ", name =" + name +
+                ", card number =" + cardNumber +
+                ", pnc =" + pnc +
+                "\n";
     }
 }
