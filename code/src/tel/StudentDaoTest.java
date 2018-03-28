@@ -18,7 +18,6 @@ public class StudentDaoTest {
 
         StudentDao so=new StudentDao();
         Student s = new Student(1,1 ,"sebastianLungu", "mypassw", "Sebastian Lungu", 21013, 1970514);
-       // Student st = so.getDataName(1);
         assert (s.getName().equals(so.getDataName(s.getName())));
 
     }

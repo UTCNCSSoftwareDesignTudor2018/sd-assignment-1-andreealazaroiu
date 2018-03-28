@@ -20,10 +20,7 @@ public class FormAdmin extends JFrame {
     private JTextArea response;
     private JTextArea studentInfo;
     private JTextField enterStudentName;
-    private JTextField enterGradeYouWantTextField;
-    private JTextField enterCourseNameTextField;
-    private JTextField enterExamDateTextField;
-    private JScrollPane scroll;
+
 
 
     public FormAdmin()
@@ -32,26 +29,19 @@ public class FormAdmin extends JFrame {
         super.setSize(1000,700);
         this.panel=new JPanel();
         this.view=new JButton("View Student Information");
-        this.update=new JButton("Update Student Information");
         this.delete=new JButton("Delete Student Information");
-        this.insert=new JButton("Add Student Information");
+        this.insert=new JButton("Add Exam Date or Grade to Student");
         this.generateReport=new JButton("Generate Student Report");
         this.response=new JTextArea(20,80);
         this.studentInfo=new JTextArea();
         this.enterStudentName=new JTextField("Enter Student Name" ,40);
-        this.enterCourseNameTextField=new JTextField("Enter Course Name",40);
-        this.enterExamDateTextField=new JTextField("Enter Exam Date",40);
-        this.enterGradeYouWantTextField=new JTextField("Enter Grade you want to submit",40);
 
         panel.add(view);
-        panel.add(update);
+       // panel.add(update);
         panel.add(delete);
         panel.add(insert);
         panel.add(generateReport);
         panel.add(enterStudentName);
-        //panel.add(enterCourseNameTextField);
-        //panel.add(enterExamDateTextField);
-        //panel.add(enterGradeYouWantTextField);
         panel.add(response);
         panel.add(studentInfo);
         panel.setVisible(true);
@@ -128,7 +118,9 @@ public class FormAdmin extends JFrame {
 
                 if(update.isEnabled())
                 {
-
+                    UpdateForm fu=new UpdateForm();
+                    fu.setVisible(true);
+                    fu.doActions2(enterStudentName.getText());
                 }
 
             }

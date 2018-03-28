@@ -29,7 +29,7 @@ public class EnrollmentService {
         eo.delete(courseName,st.getName());
     }
 
-    public void updateEnrollment(String student,String curs,String exam)
+    public void updateEnrollment(String student,String curs,String exam,int grade)
     {
         EnrollmentDao eo=new EnrollmentDao();
         StudentDao st=new StudentDao();
@@ -39,7 +39,7 @@ public class EnrollmentService {
         Enrollment en=eo.getDataName(s);
         DateTimeFormatter formatter_1= DateTimeFormatter.ofPattern("yyyy-MM-dd");
         LocalDate localDate_1= LocalDate.parse(exam,formatter_1);
-        eo.update(s,c,localDate_1,en.getGrade());
+        eo.update(s,c,localDate_1,grade);
 
 
     }

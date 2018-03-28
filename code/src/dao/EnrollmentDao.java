@@ -47,7 +47,9 @@ public class EnrollmentDao {
             ResultSet rs=s.executeQuery();
             while(rs.next())
             {
-                st=new Enrollment(rs.getInt(5),stud.getData(rs.getInt(1)),co.getData(rs.getInt(2)),null,rs.getInt(4));
+                st=new Enrollment(rs.getInt(5),stud.getData(rs.getInt(1)),
+                                            co.getData(rs.getInt(2)),null,
+                                            rs.getInt(4));
 
             }
             ConnectionFactory.close(rs);
@@ -117,13 +119,35 @@ public class EnrollmentDao {
         Connection con = ConnectionFactory.getConnection();
         try {
 
+
             PreparedStatement st = con.prepareStatement("UPDATE enrollments SET  studentId= ?, courseId=?,dateExam=?,grade=? WHERE studentId= ? and courseId=?");
             st.setInt(1, s.getId());
             st.setInt(2, c.getId());
-            st.setDate(3, Date.valueOf(ex));
+            st.setDate(3,Date.valueOf(ex));
             st.setInt(4,grade);
             st.setInt(5,s.getId());
             st.setInt(6,c.getId());
+
+            st.executeUpdate();
+            st.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            ConnectionFactory.close(con);
+        }
+
+    }
+    public void update(Enrollment eo) {
+        Connection con = ConnectionFactory.getConnection();
+        try {
+
+            PreparedStatement st = con.prepareStatement("UPDATE enrollments SET  studentId= ?, courseId=?,dateExam=?,grade=? WHERE studentId= ? and courseId=?");
+            st.setInt(1, eo.getStudent().getId());
+            st.setInt(2, eo.getCourse().getId());
+            st.setDate(3,Date.valueOf(eo.getExam()));
+            st.setInt(4,eo.getGrade());
+            st.setInt(5,eo.getStudent().getId());
+            st.setInt(6,eo.getCourse().getId());
 
             st.executeUpdate();
             st.close();

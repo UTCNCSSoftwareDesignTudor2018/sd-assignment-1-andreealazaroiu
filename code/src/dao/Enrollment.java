@@ -88,7 +88,7 @@ public class Enrollment {
         if (exam==null)
         {exe="Date not set yet";}
         else
-            exe+=exam.toString();
+            exe+=""+exam;
 
         return "Enrollment:" +
                 "enrollment id =" + enrollId +

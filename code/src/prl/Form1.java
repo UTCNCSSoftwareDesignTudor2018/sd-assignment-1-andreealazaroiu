@@ -59,11 +59,19 @@ public class Form1 extends JFrame {
                 {FormAdmin f= new FormAdmin();
                     f.setVisible(true);
                     f.doActions();}
+                    else
+                {
+                    pleaseSignin.setText("The username and password are wrong.\n Please try again or create a new account");
+                }
 
                 if(login.isEnabled() && us.verifyLogin(u,pa) && !us.isAdmin(u,pa))
                 {   Form2 f2=new Form2();
                     f2.setVisible(true);
                     f2.doActions(u);
+                }
+                else
+                {
+                    pleaseSignin.setText("The username and password are wrong.\n Please try again or create a new account");
                 }
 
 

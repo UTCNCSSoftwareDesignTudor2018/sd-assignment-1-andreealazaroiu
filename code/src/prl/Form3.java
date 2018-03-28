@@ -18,6 +18,7 @@ public class Form3 extends JFrame{
     private JTextField pncField;
     private JPanel panel1;
     private JButton signin;
+    private JTextArea resp;
 
     public Form3(){
 
@@ -30,6 +31,7 @@ public class Form3 extends JFrame{
         this.nameField=new JTextField("Name",20);
         this.cardField=new JTextField("Card",5);
         this.pncField=new JTextField("PNC",6);
+        this.resp=new JTextArea();
 
         this.signin=new JButton("Sign In");
 
@@ -39,6 +41,7 @@ public class Form3 extends JFrame{
         panel1.add(cardField);
         panel1.add(pncField);
         panel1.add(signin);
+        panel1.add(resp);
 
         panel1.setVisible(true);
         super.add(panel1);
@@ -63,6 +66,8 @@ public class Form3 extends JFrame{
                             nameField.getText(),Integer.parseInt(cardField.getText()),Integer.parseInt(pncField.getText())));
 
                 }
+                resp.setText("The account has been created");
+
             }
         });
 

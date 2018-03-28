@@ -85,12 +85,20 @@ public class AdminService {
         Student s=so.getDataName(st);
         so.delete(s);
     }
-    public void addExamdate(String s,String c,String e)
+    public void addExamdate(String s,String c,String e,int grade)
     {
         StudentService us=new StudentService();
         String si=us.createStudent(s).getName();
         EnrollmentService es=new EnrollmentService();
-        es.updateEnrollment(si,c,e);
+        es.updateEnrollment(si,c,e,grade);
+    }
+
+    public void addGrade(String s,String c,String g)
+    {
+        StudentService us=new StudentService();
+        String si=us.createStudent(s).getName();
+        EnrollmentService es=new EnrollmentService();
+        //es.updateEnrollment(si,c, Integer.valueOf(g));
     }
 
 }
